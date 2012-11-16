@@ -1,0 +1,17 @@
+{% extends "ticket/ticket.html" %}
+{% comment %}
+
+Main page of the portal.
+
+{% endcomment %}
+
+{% block title %}
+    Ticket
+{% endblock %}
+
+{% block content %}
+    <section>
+        <h2>Welcome, {{ user.username }}</h2>
+        <p>This is the main page of the web portal.</p>
+    </section>
+{% endblock %}
