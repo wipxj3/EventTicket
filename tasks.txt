@@ -1,0 +1,15 @@
+1. Log in serj
+2. Log out serj
+3. Register serj
+4. Generate QR igor
+5. Decode QR igor
+6. Read QR from camera igor
+7. Send reminder email placinta
+8. Send hottest events email. placinta
+9. Booking a Ticket. vova
+10. Pay for ticket. vova
+11. Add event. vova
+12. Edit event. alex
+13. Delete event. alex
+14. List event. alex
+15. Unsubscribe from emails. placinta
