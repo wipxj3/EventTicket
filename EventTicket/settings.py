@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'ticket',
     'django_site_users',
+    'lettuce.django',
 )
 
 # A sample logging configuration. The only tangible logging
