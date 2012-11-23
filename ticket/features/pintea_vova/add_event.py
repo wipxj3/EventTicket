@@ -19,11 +19,11 @@ def then_i_see_button(step, text):
     button = world.dom.cssselect('button')[0]
     assert button.text == text
 
-@step(r'I press "Add Event"')
-def when_i_press_add_event(step):
-    pass
+@step(r'I press "([^"]*)"')
+def when_i_press_add_event(step,text):
+    button = world.dom.cssselect('button#add_event')[0]
+    assert button.text == text
 
 @step(u'Then I see new event form')
 def then_i_see_new_event_form(step):
-    pass
-    #assert False, 'This step must be implemented'
+    assert False, 'This step must be implemented'

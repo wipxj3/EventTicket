@@ -1,4 +1,4 @@
-Feature: Add even
+Feature: Add event
     Scenario: Add event button
         Given I am logged in "/"
         Then I see button "Add Event"
