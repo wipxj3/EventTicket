@@ -5,6 +5,6 @@ Feature: Add even
 
     Scenario: Press add event button
         Given I am logged in "/"
-        When I press add event
+        When I press "Add Event"
         Then I see new event form
 
