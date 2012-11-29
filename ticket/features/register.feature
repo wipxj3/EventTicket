@@ -1,13 +1,15 @@
 Feature: Register on website
     Scenario: All fields are valid
-        Given I access the url "/register/"
-        When email is "a@a.com"
-        And password is "qwerty"
-        And confirm password is "qwerty"
-        Then I am redirected to "/"
+        Given I access the register url
+        When I enter a valid email
+        And I enter a valid password
+        And I manage to confirm the password
+        And I submit the form
+        Then I get register success message
     Scenario: Email is not valid
-        Given I access the url "/register/"
-        When email is "a"
-        And password is "qwerty"
-        And confirm password is "qwerty"
-        Then I get error message "Invalid email"
+        Given I access the register url
+        When I enter an invalid email
+        And I enter a valid password
+        And I manage to confirm the password
+        And I submit the form
+        Then I get register error message
