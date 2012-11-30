@@ -4,13 +4,13 @@ Feature: Testing connection to server
     I want to attend events
     
     Scenario: Connect to default django's address
-        Given the ip address of server "0.0.0.0"
-        And the port number "8000"
+        Given the ip address of server
+        And the port number
         When I connect to server
         Then I get "Connection established"
         
     Scenario: Connect to localhost
-        Given the ip address of server "localhost"
-        And the port number "80"
+        Given the ip address of the localhost
+        And the port number
         When I connect to server
         Then I get "Connection established"
