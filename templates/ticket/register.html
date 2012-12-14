@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block head %}
+<h3>Register</h3>
+{% endblock %}
+
+{% block body %}
+    <div id="contact_wrap">
+
+        <div id="contact" class="clearfix">
+            {% if success != '' %}
+                <div id="register_success">{{ success }}</div>
+            {% endif %}
+            {% if error != '' %}
+                <div id="register_error">{{ error }}</div>
+            {% endif %}
+        
+            <div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div>
+                        <label>Email:</label>
+                        <input type="text" name="email" id="email" />
+                    </div><!-- end name_email -->
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" name="password" id="password" />
+                    </div>
+                    <div>
+                        <label>Confirm password:</label>
+                        <input type="password" name="confirm_password" id="confirm_password" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Register" />   
+                    </div>
+                </form>
+
+            </div><!-- end c_form -->
+        </div><!-- end contact -->
+
+    </div><!-- end contact_wrap -->
+
+{% endblock %}
