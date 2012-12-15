@@ -1,0 +1,4 @@
+Sergiu Crucerescu refactored the code of the function register_view(request), located in EventTicket/ticket/views.py.
+Now there are two functions: bad_register_view(request) and register_view(request). The first one has comments that say 
+what refactoring pattern should be applied to the code that follows. The second one has the refactoring patterns applied
+and is the working function.
