@@ -25,10 +25,10 @@ class QRencode():
         t = time.localtime()
         return str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
     def getData(self, iCinema, iDay, iTime, iMovie, iLoc):
-        lst = [iCinema, iDay, iTime, iMovie, iLoc]
+        lst_d = [iCinema, iDay, iTime, iMovie, iLoc]
         self.salt = str(os.urandom(128))
         #Replace Temp with Query
-        self.info = getEventInfo() #instead of
+        self.info = self.getEventInfo(lst_d) #instead of
         #self.info = places.cinema[int(lst[0])] +'_'\
                     #+ places.day[int(lst[1])] +'_'\
                     #+ places.time_stamp[int(lst[2])] +'_'\
@@ -37,7 +37,7 @@ class QRencode():
         self.data = base64.b64encode(hashlib.sha512(self.salt + self.info).hexdigest())
         return [self.info, self.data[30:84]]
     #Replace Temp with Query
-    def getEventInfo(self):
+    def getEventInfo(self, lst):
         return places.cinema[int(lst[0])] +'_'\
                     + places.day[int(lst[1])] +'_'\
                     + places.time_stamp[int(lst[2])] +'_'\
