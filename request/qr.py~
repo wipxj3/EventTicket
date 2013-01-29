@@ -27,7 +27,6 @@ class QRencode():
     def getData(self, iCinema, iDay, iTime, iMovie, iLoc):
         lst = [iCinema, iDay, iTime, iMovie, iLoc]
         self.salt = str(os.urandom(128))
-        #Replace Temp with Query
         self.info = getEventInfo() #instead of
         #self.info = places.cinema[int(lst[0])] +'_'\
                     #+ places.day[int(lst[1])] +'_'\
@@ -76,15 +75,11 @@ class QRencode():
             result = cur.execute("SELECT COUNT(*) FROM QRs WHERE qrHash=?", (recvHash,))
             rows = result.next()[0]
             #print 'FOUND',rows
-            #Consolidate Duplicate Conditional Fragments
             if rows == 1:
                 response = 'VALID'
-                #return response
             else:
                 response = 'INVALID'
-                #return response
             return response
-            
 def handler(clientSocket, remoteAddress):
     while True:
         qr = QRencode()
