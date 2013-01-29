@@ -1,6 +1,18 @@
-List of notification emails
+{% extends "base.html" %}
+{% block head %}
+    <title>Django Consultants |Email notification list</title>
+{% endblock %}
+
+{% block body %}
+<h1>List of notification emails</h1>
+<style>
+    table, tr, td {border: 1px solid black;}
+</style>
 <table>
+    <tr><td>Title</td><td>Content</td></tr>
 {% for n in notifications %}
         <tr><td>{{ n.email_notification_name }}</td><td> {{ n.email_notification_content }} </td></tr>
 {% endfor %}
 </table>
+<a href="{% url AddEmailNotification %}">Add email notification</a>
+{% endblock %}
