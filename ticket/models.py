@@ -12,3 +12,7 @@ class RegisterForm(forms.Form):
 class EmailNotification(models.Model):
     email_notification_name = models.CharField(max_length=80)
     email_notification_content = models.TextField()
+
+class EmailNotificationForm(forms.Form):
+    email_notification_name = forms.CharField()
+    email_notification_content = forms.CharField(widget=forms.widgets.Textarea())

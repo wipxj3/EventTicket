@@ -1,9 +1,9 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from ticket.models import RegisterForm
+from ticket.models import RegisterForm, EmailNotificationForm
 from django.template import RequestContext, Context
 from django import forms
 from django.forms.widgets import *
@@ -88,3 +88,11 @@ def register_view(request):
         'error': error,                                              
         },
         RequestContext(request))
+
+def email_notification_add(request):
+    if request.method == 'POST':
+        form = EmailNotificationForm(request.POST)
+
+    else:
+        form = EmailNotificationForm()
+    return render(request, 'emails/email_notification_add.html', {'form': form})
