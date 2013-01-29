@@ -120,10 +120,12 @@ def email_notification_execute(request):
             for user in users:
                 recipients.append(user.email)
             subject = form.cleaned_data['email_notification_name']
-            email_notification = EmailNotification.objects.filter(email_notification_name=subject)
-            email_notification = email_notification[0]
 
-            message = email_notification.email_notification_content
+            # Introduce explaining variable
+            email_notifications_list = EmailNotification.objects.filter(email_notification_name=subject)
+            first_email_notification = email_notifications_list[0]
+
+            message = first_email_notification.email_notification_content
             sender = "admin@django_consultants.md"
 
 
