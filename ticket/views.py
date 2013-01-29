@@ -90,6 +90,7 @@ def register_view(request):
         RequestContext(request))
 
 def email_notification_add(request):
+    messages = []
     if request.method == 'POST':
         form = EmailNotificationForm(request.POST)
         if form.is_valid():
@@ -97,9 +98,11 @@ def email_notification_add(request):
             content = form.cleaned_data['email_notification_content']
             notification = EmailNotification(email_notification_name = name, email_notification_content = content)
             notification.save()
+            # Set success message here, and display the same form
+            messages.append("Email notification added successfully")
     else:
         form = EmailNotificationForm()
-    return render(request, 'emails/email_notification_add.html', {'form': form})
+    return render(request, 'emails/email_notification_add.html', {'form': form, 'messages' : messages})
 
 def email_notification_list(request):
     notifications = EmailNotification.objects.all()

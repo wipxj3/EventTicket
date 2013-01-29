@@ -1,4 +1,9 @@
+{% if messages %}
+    {% for m in messages %}
+            <div>{{ m }}</div>
+    {% endfor %}
+{% endif %}
 <form method="post">{% csrf_token %}
-{{ form.as_p }}
-<input type="submit" value="Submit" />
+    {{ form.as_p }}
+    <input type="submit" value="Add" />
 </form>
