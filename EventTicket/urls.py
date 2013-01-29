@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from EventTicket import settings
 from django_site_users.views import *
 
 # Uncomment the next two lines to enable the admin:
@@ -18,7 +19,10 @@ urlpatterns = patterns('',
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^request', "request.views.request"),
     # Serve static content.
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static'}),
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.STATIC_ROOT,
+        }),
     (r'^register/', 'ticket.views.register_view'),
 )
