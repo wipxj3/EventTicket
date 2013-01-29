@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, render
 from django.contrib.auth.decorators import login_required
 
@@ -113,7 +114,21 @@ def email_notification_execute(request):
     if request.method == 'POST':
         form = EmailNotificationExecutionForm(request.POST)
         if form.is_valid():
-            # Run stuff
+            # Send notifications to registered users
+            users = User.objects.all()
+            recipients = []
+            for user in users:
+                recipients.append(user.email)
+            subject = form.cleaned_data['email_notification_name']
+            email_notification = EmailNotification.objects.filter(email_notification_name=subject)
+            email_notification = email_notification[0]
+
+            message = email_notification.email_notification_content
+            sender = "admin@django_consultants.md"
+
+
+            from django.core.mail import send_mail
+            send_mail(subject, message, sender, recipients)
 
             # Set success message here, and display the same form
             messages.append(" Notifications sent successfully")
