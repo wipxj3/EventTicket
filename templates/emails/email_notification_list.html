@@ -1,6 +1,6 @@
 List of notification emails
 <table>
 {% for n in notifications %}
-        <tr><td>{{ n }}</td></tr>
+        <tr><td>{{ n.email_notification_name }}</td><td> {{ n.email_notification_content }} </td></tr>
 {% endfor %}
 </table>
