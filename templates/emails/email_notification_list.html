@@ -14,5 +14,6 @@
         <tr><td>{{ n.email_notification_name }}</td><td> {{ n.email_notification_content }} </td></tr>
 {% endfor %}
 </table>
-<a href="{% url AddEmailNotification %}">Add email notification</a>
+<a href="{% url AddEmailNotification %}">Add email notification</a><br/>
+<a href="{% url EmailNotificationSend %}">Send notifications to all registered users</a>
 {% endblock %}

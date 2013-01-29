@@ -16,3 +16,11 @@ class EmailNotification(models.Model):
 class EmailNotificationForm(forms.Form):
     email_notification_name = forms.CharField(required=True)
     email_notification_content = forms.CharField(widget=forms.widgets.Textarea())
+
+class EmailNotificationExecutionForm(forms.Form):
+    notification_choices = EmailNotification.objects.all()
+    field_choices = []
+    for choice in notification_choices:
+        field_choices.append((choice.email_notification_name, choice.email_notification_name))
+
+    email_notification_name = forms.ChoiceField(required=True, choices=field_choices)

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from ticket.models import RegisterForm, EmailNotificationForm, EmailNotification
+from ticket.models import RegisterForm, EmailNotificationForm, EmailNotification, EmailNotificationExecutionForm
 from django.template import RequestContext, Context
 from django import forms
 from django.forms.widgets import *
@@ -107,3 +107,16 @@ def email_notification_add(request):
 def email_notification_list(request):
     notifications = EmailNotification.objects.all()
     return render(request, 'emails/email_notification_list.html', {'notifications': notifications})
+
+def email_notification_execute(request):
+    messages = []
+    if request.method == 'POST':
+        form = EmailNotificationExecutionForm(request.POST)
+        if form.is_valid():
+            # Run stuff
+
+            # Set success message here, and display the same form
+            messages.append(" Notifications sent successfully")
+    else:
+        form = EmailNotificationExecutionForm()
+    return render(request, 'emails/email_notification_execute.html', {'form': form, 'messages': messages})

@@ -23,5 +23,7 @@ urlpatterns = patterns('',
     (r'^register/', 'ticket.views.register_view'),
 
     url(r'^email-notification/add/', 'ticket.views.email_notification_add', name='AddEmailNotification'),
+    url(r'^email-notification/send', 'ticket.views.email_notification_execute', name="EmailNotificationSend"),
     url(r'^email-notification/', 'ticket.views.email_notification_list', name="ListEmailNotifications"),
+
 )

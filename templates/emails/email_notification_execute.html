@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}
+    <title>Django Consultants | Send notifications</title>
+{% endblock %}
+
+{% block body %}
+{% if messages %}
+    {% for m in messages %}
+            <div>{{ m }}</div>
+    {% endfor %}
+{% endif %}
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Send notifications" />
+</form>
+<a href="{% url ListEmailNotifications %}">Email notifications list</a><br/>
+{% endblock %}
