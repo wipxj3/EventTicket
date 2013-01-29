@@ -14,5 +14,5 @@ class EmailNotification(models.Model):
     email_notification_content = models.TextField()
 
 class EmailNotificationForm(forms.Form):
-    email_notification_name = forms.CharField()
+    email_notification_name = forms.CharField(required=True)
     email_notification_content = forms.CharField(widget=forms.widgets.Textarea())

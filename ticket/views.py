@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from ticket.models import RegisterForm, EmailNotificationForm
+from ticket.models import RegisterForm, EmailNotificationForm, EmailNotification
 from django.template import RequestContext, Context
 from django import forms
 from django.forms.widgets import *
@@ -92,7 +92,11 @@ def register_view(request):
 def email_notification_add(request):
     if request.method == 'POST':
         form = EmailNotificationForm(request.POST)
-
+        if form.is_valid():
+            name = form.cleaned_data['email_notification_name']
+            content = form.cleaned_data['email_notification_content']
+            notification = EmailNotification(email_notification_name = name, email_notification_content = content)
+            notification.save()
     else:
         form = EmailNotificationForm()
     return render(request, 'emails/email_notification_add.html', {'form': form})
