@@ -16,20 +16,33 @@ import places
 #print '< SERVER UP! >'
 
 class QRencode():
-    def getTime(self):
+    def bad_getTime(self):
         t = time.localtime()
         timestamp = str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
         return timestamp
+    #Inline Temp
+    def getTime(self):
+        t = time.localtime()
+        return str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
     def getData(self, iCinema, iDay, iTime, iMovie, iLoc):
         lst = [iCinema, iDay, iTime, iMovie, iLoc]
         self.salt = str(os.urandom(128))
-        self.info = places.cinema[int(lst[0])] +'_'\
+        self.info = getEventInfo() #instead of
+        #self.info = places.cinema[int(lst[0])] +'_'\
+                    #+ places.day[int(lst[1])] +'_'\
+                    #+ places.time_stamp[int(lst[2])] +'_'\
+                    #+ places.movie[int(lst[3])] +'_'\
+                    #+ places.locul[int(lst[4])]
+        self.data = base64.b64encode(hashlib.sha512(self.salt + self.info).hexdigest())
+        return [self.info, self.data[30:84]]
+    #Replace Temp with Query
+    def getEventInfo(self):
+        return places.cinema[int(lst[0])] +'_'\
                     + places.day[int(lst[1])] +'_'\
                     + places.time_stamp[int(lst[2])] +'_'\
                     + places.movie[int(lst[3])] +'_'\
                     + places.locul[int(lst[4])]
-        self.data = base64.b64encode(hashlib.sha512(self.salt + self.info).hexdigest())
-        return [self.info, self.data[30:84]]
+    
     def generate(self, data):
         qr = qrcode.QRCode(
             version=6,
