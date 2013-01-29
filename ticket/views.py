@@ -128,7 +128,10 @@ def email_notification_execute(request):
 
 
             from django.core.mail import send_mail
-            send_mail(subject, message, sender, recipients)
+            try:
+                send_mail(subject, message, sender, recipients)
+            except:
+                messages.append("Unable to send email notification to users")
 
             # Set success message here, and display the same form
             messages.append(" Notifications sent successfully")
