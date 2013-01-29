@@ -109,6 +109,16 @@ def email_notification_list(request):
     notifications = EmailNotification.objects.all()
     return render(request, 'emails/email_notification_list.html', {'notifications': notifications})
 
+def get_all_users():
+    users = User.objects.all()
+    recipients = []
+    for user in users:
+        recipients.append(user.email)
+    return recipients
+
+def get_website_email():
+    return "admin@django_consultants.md"
+
 def email_notification_execute(request):
     messages = []
     if request.method == 'POST':
@@ -116,9 +126,12 @@ def email_notification_execute(request):
         if form.is_valid():
             # Send notifications to registered users
             users = User.objects.all()
-            recipients = []
-            for user in users:
-                recipients.append(user.email)
+
+            # Introduce assertion
+            assert users != []
+
+            # Extract method
+            recipients = get_all_users()
             subject = form.cleaned_data['email_notification_name']
 
             # Introduce explaining variable
@@ -126,8 +139,9 @@ def email_notification_execute(request):
             first_email_notification = email_notifications_list[0]
 
             message = first_email_notification.email_notification_content
-            sender = "admin@django_consultants.md"
 
+            # Extract method
+            sender = get_website_email()
 
             from django.core.mail import send_mail
             try:
