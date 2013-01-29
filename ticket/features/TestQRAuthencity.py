@@ -25,6 +25,6 @@ def fectch_hash():
     
 def validate_ticket(array, elem):
     for item in enumerate(array):
-    if item == elem:
-        return "Valid Ticket"
-    return "Invalid Ticket"
+        if item == elem:
+            return "Valid Ticket"
+        return "Invalid Ticket"
