@@ -28,7 +28,7 @@ class QRencode():
         lst_d = [iCinema, iDay, iTime, iMovie, iLoc]
         self.salt = str(os.urandom(128))
         #Replace Temp with Query
-        self.info = getEventInfo(lst) #instead of
+        #self.info = getEventInfo(lst) #instead of
         self.info = self.getEventInfo(lst_d) #instead of
         #self.info = places.cinema[int(lst[0])] +'_'\
                     #+ places.day[int(lst[1])] +'_'\
