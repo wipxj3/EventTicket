@@ -28,7 +28,7 @@ class QRencode():
         lst = [iCinema, iDay, iTime, iMovie, iLoc]
         self.salt = str(os.urandom(128))
         #Replace Temp with Query
-        self.info = getEventInfo() #instead of
+        self.info = getEventInfo(lst) #instead of
         #self.info = places.cinema[int(lst[0])] +'_'\
                     #+ places.day[int(lst[1])] +'_'\
                     #+ places.time_stamp[int(lst[2])] +'_'\
@@ -37,7 +37,7 @@ class QRencode():
         self.data = base64.b64encode(hashlib.sha512(self.salt + self.info).hexdigest())
         return [self.info, self.data[30:84]]
     #Replace Temp with Query
-    def getEventInfo(self):
+    def getEventInfo(self,lst):
         return places.cinema[int(lst[0])] +'_'\
                     + places.day[int(lst[1])] +'_'\
                     + places.time_stamp[int(lst[2])] +'_'\
