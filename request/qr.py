@@ -59,7 +59,7 @@ class QRencode():
         im.save(imagePath + imageIndex + '.png')
         return imageIndex
     def saveToDB(self, qrImage, info, qrHash):
-        conn = sqlite3.connect('/qr.db')
+        conn = sqlite3.connect('./qr.db')
         c = conn.cursor()
         # Insert a row of data
         c.execute("INSERT INTO QRs VALUES (?, ?, ? ,?)", (None ,qrImage, info, qrHash))
@@ -69,7 +69,7 @@ class QRencode():
         c.close()
         return 'added to DB!'
     def verifyHash(self, recvHash):
-        con = sqlite3.connect('/qr.db')
+        con = sqlite3.connect('./qr.db')
         with con:
             cur = con.cursor()
             result = cur.execute("SELECT COUNT(*) FROM QRs WHERE qrHash=?", (recvHash,))
