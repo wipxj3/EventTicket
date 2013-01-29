@@ -8,3 +8,7 @@ class RegisterForm(forms.Form):
     email = forms.EmailField()
     password = forms.PasswordInput()
     confirm_password = forms.PasswordInput()
+
+class EmailNotification(models.Model):
+    email_notification_name = models.CharField(max_length=80)
+    email_notification_content = models.TextField()
