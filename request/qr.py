@@ -16,10 +16,10 @@ import places
 #print '< SERVER UP! >'
 
 class QRencode():
-    def bad_getTime(self):
-        t = time.localtime()
-        timestamp = str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
-        return timestamp
+    #def bad_getTime(self):
+        #t = time.localtime()
+        #timestamp = str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
+        #return timestamp
     #Inline Temp
     def getTime(self):
         t = time.localtime()
@@ -34,7 +34,10 @@ class QRencode():
                     #+ places.time_stamp[int(lst[2])] +'_'\
                     #+ places.movie[int(lst[3])] +'_'\
                     #+ places.locul[int(lst[4])]
-        self.data = base64.b64encode(hashlib.sha512(self.salt + self.info).hexdigest())
+        #Introduce Explaining Variable
+        digest = hashlib.sha512(self.salt + self.info).hexdigest()
+        self.data = base64.b64encode(digest)
+        #self.data = base64.b64encode(hashlib.sha512(self.salt + self.info).hexdigest())
         return [self.info, self.data[30:84]]
     #Replace Temp with Query
     def getEventInfo(self,lst):
@@ -113,7 +116,9 @@ def handler(clientSocket, remoteAddress):
             f.close()
         elif serverRecieved == ' ':
             print 'poke!'
-        elif serverRecieved == "close" or serverRecieved == "Close":
+        #Decompose Conditional
+        #elif serverRecieved == "close" or serverRecieved == "Close":
+        elif isConnectionClosed(serverRecieved):
             clientSocket.send("bye-bye")
             clientSocket.close()
             break
@@ -125,6 +130,9 @@ def handler(clientSocket, remoteAddress):
 #            break
         else:
             clientSocket.send("> Can you elaborate on that?")
+
+def isConnectionClosed(self,serverRecieved):
+    return serverRecieved == "close" or serverRecieved == "Close" or serverRecieved == "CLOSE"
 #if __name__ == "__main__":
 #    kill = 0
 #    val = 1
