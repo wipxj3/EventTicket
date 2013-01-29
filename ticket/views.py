@@ -100,3 +100,7 @@ def email_notification_add(request):
     else:
         form = EmailNotificationForm()
     return render(request, 'emails/email_notification_add.html', {'form': form})
+
+def email_notification_list(request):
+    notifications = EmailNotification.objects.all()
+    return render(request, 'emails/email_notification_list.html', {'notifications': notifications})
