@@ -21,6 +21,7 @@ urlpatterns = patterns('',
     # Serve static content.
     (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': 'static'}),
     (r'^register/', 'ticket.views.register_view'),
+
     url(r'^email-notification/add/', 'ticket.views.email_notification_add', name='AddEmailNotification'),
-    (r'^email-notification/', 'ticket.views.email_notification_list'),
+    url(r'^email-notification/', 'ticket.views.email_notification_list', name="ListEmailNotifications"),
 )
