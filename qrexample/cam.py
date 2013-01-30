@@ -18,14 +18,13 @@ class CaptureImage():
         while True:
             try:
                 img = cv.QueryFrame(frame)
-
                 #cv.Rectangle(img, (140,60),(500,420), cv.RGB(0, 255, 255), 3, 8, 0)
                 cv.ShowImage('QR scanner', img)
                 if cv.WaitKey(10) == 27:
                     #Extract Method
                     #clientSocket.shutdown(2)
                     #clientSocket.close()
-                    disconnect()
+                    self.disconnect()
                     sys.exit(1)
                 elif cv.WaitKey(10) == ord(' '):
                     imagePath = './/capture//'
@@ -47,6 +46,8 @@ class CaptureImage():
     def disconnect(self):
         clientSocket.shutdown(2)
         clientSocket.close()
+
+
 class QRdecode():
     def __init__(self, imageIndex):
         pil = open(imageIndex +'.png').convert('L')
@@ -61,6 +62,10 @@ class QRdecode():
         self.data = str(self.info)
     def getData(self):
         return self.data
+
+def isConnClosed(self,clientRecieved):
+    return (clientRecieved=="bye-bye") or (clientRecieved=="down") or (clientRecieved=="close") or (clientRecieved=="Close") or (clientRecieved=="CLOSE")
+
 if __name__ == "__main__":
     while True:
         try:
@@ -95,6 +100,3 @@ if __name__ == "__main__":
                     break
         except Exception:
             print 'No data found!'
-
-def isConnClosed(self,clientRecieved):
-    return (clientRecieved=="bye-bye") or (clientRecieved=="down") or (clientRecieved=="close") or (clientRecieved=="Close") or (clientRecieved=="CLOSE")
