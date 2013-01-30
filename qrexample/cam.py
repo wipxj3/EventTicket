@@ -22,8 +22,10 @@ class CaptureImage():
                 #cv.Rectangle(img, (140,60),(500,420), cv.RGB(0, 255, 255), 3, 8, 0)
                 cv.ShowImage('QR scanner', img)
                 if cv.WaitKey(10) == 27:
-                    clientSocket.shutdown(2)
-                    clientSocket.close()
+                    #Extract Method
+                    #clientSocket.shutdown(2)
+                    #clientSocket.close()
+                    disconnect()
                     sys.exit(1)
                 elif cv.WaitKey(10) == ord(' '):
                     imagePath = './/capture//'
@@ -34,10 +36,17 @@ class CaptureImage():
                     break
             except Exception:
                 continue
+    #Inline Temp
+    #def bad_getTime(self):
+        #t = time.localtime()
+        #timestamp = str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
+        #return timestamp
     def getTime(self):
         t = time.localtime()
-        timestamp = str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
-        return timestamp
+        return str(t.tm_hour)+'_'+str(t.tm_min)+'_'+str(t.tm_sec)
+    def disconnect(self):
+        clientSocket.shutdown(2)
+        clientSocket.close()
 class QRdecode():
     def __init__(self, imageIndex):
         pil = open(imageIndex +'.png').convert('L')
@@ -78,9 +87,14 @@ if __name__ == "__main__":
             else:
                 clientRecieved = clientSocket.recv(1024)
                 print "> I recieved from server: \n", clientRecieved
-                if (clientRecieved=='bye-bye') or (clientRecieved=='down'):
+                #Decompose Conditional
+                #if (clientRecieved=='bye-bye') or (clientRecieved=='down'):
+                if isConnClosed(clientRecieved):
                     clientSocket.shutdown(2)
                     clientSocket.close()
                     break
         except Exception:
             print 'No data found!'
+
+def isConnClosed(self,clientRecieved):
+    return (clientRecieved=="bye-bye") or (clientRecieved=="down") or (clientRecieved=="close") or (clientRecieved=="Close") or (clientRecieved=="CLOSE")
