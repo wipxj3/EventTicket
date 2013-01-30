@@ -2,3 +2,4 @@ Sergiu Crucerescu refactored the code of the function register_view(request), lo
 Now there are two functions: bad_register_view(request) and register_view(request). The first one has comments that say 
 what refactoring pattern should be applied to the code that follows. The second one has the refactoring patterns applied
 and is the working function.
+Marta Igor refactored the code in EventTicket/request/qr.py. The applied patterns are indicated in comments, as well as the code before and after.
